@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>【我不是戏神】红衣时刻 - 纪念站</title>
+    <style>
+        :root {
+            --red-primary: #8a0000; 
+            --red-bright: #ff1a1a;
+            --dark-bg: #0a0a0a;
+            --text-main: #e0e0e0;
+            --font-serif: 'Songti SC', 'SimSun', serif; 
+            --font-sans: 'Helvetica Neue', sans-serif;
+            --easing-snap: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            background-color: var(--dark-bg);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            overflow-x: hidden;
+        }
+
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 900;
+            opacity: 0.07;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
+        }
+
+        section {
+            padding: 5vh 5vw;
+            position: relative;
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-serif);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .dramatic-title {
+            font-size: 4rem;
+            color: var(--text-main);
+            mix-blend-mode: exclusion;
+            position: relative;
+            margin-bottom: 3rem;
+            margin-left: max(5vw, 20px);
+            text-shadow: 2px 2px 0px var(--red-primary);
+        }
+
+        .dramatic-title::after {
+            content: '';
+            position: absolute;
+            bottom: 10px;
+            left: -20px;
+            width: 120%;
+            height: 15px;
+            background: var(--red-primary);
+            z-index: -1;
+            transform: skewX(-20deg);
+        }
+
+        .main-logo-text {
+            font-family: 'STXingkai', 'Xingkai SC', 'KaiTi', '楷体', cursive;
+            font-size: 5.5rem;
+            font-weight: bold;
+            color: var(--red-bright);
+            text-shadow: 
+                0 0 20px rgba(255, 26, 26, 0.6),
+                0 0 40px rgba(138, 0, 0, 0.4),
+                4px 4px 0px rgba(0, 0, 0, 0.8);
+            letter-spacing: 15px;
+            line-height: 1.1;
+            transform: rotate(-3deg) skewX(-5deg);
+            display: inline-block;
+            margin-bottom: 10px;
+            margin-left: -10px;
+            pointer-events: auto;
+        }
+
+        .sub-author-text {
+            font-family: 'STXingkai', 'KaiTi', serif;
+            font-size: 1rem;
+            color: #666;
+            writing-mode: vertical-rl;
+            text-orientation: upright;
+            letter-spacing: 5px;
+            margin-left: 15px;
+            display: inline-block;
+            vertical-align: top;
+            margin-top: 10px;
+            opacity: 0.7;
+        }
+
+        .intro-section {
+            display: flex;
+            min-height: 90vh;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        .character-box {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-right: 5vw;
+        }
+
+        .character-img-placeholder {
+            width: 100%;
+            height: 600px;
+            background: linear-gradient(135deg, #1a1a1a, #000);
+            border: 1px solid #333;
+            position: relative; 
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .character-img-real {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%) contrast(120%);
+            transition: filter 0.5s var(--easing-snap);
+        }
+        .character-img-real:hover {
+            filter: grayscale(0%) sepia(20%) saturate(200%) hue-rotate(-20deg);
+        }
+
+        .voice-play-btn {
+            position: absolute;
+            bottom: -20px;
+            left: -20px;
+            background: var(--red-primary);
+            color: #fff;
+            padding: 15px 30px;
+            border: none;
+            font-weight: bold;
+            font-family: var(--font-serif);
+            cursor: pointer;
+            box-shadow: 5px 5px 0 #fff;
+            transition: transform 0.2s var(--easing-snap);
+            z-index: 10;
+        }
+
+        .voice-play-btn:hover {
+            background: #a00000;
+        }
+
+        .voice-play-btn:active {
+            transform: scale(0.95);
+        }
+
+        .knives-section {
+            background-color: #0f0f0f;
+            overflow: hidden;
+        }
+
+        .scrolling-wrapper {
+            display: flex;
+            gap: 20px;
+            padding: 20px 0;
+            overflow-x: auto;
+            scrollbar-width: none; 
+        }
+        .scrolling-wrapper::-webkit-scrollbar { display: none; }
+
+        .knife-card {
+            min-width: 300px;
+            max-width: 300px;
+            background: #141414;
+            border-left: 4px solid var(--red-primary);
+            padding: 20px;
+            position: relative;
+            transition: transform 0.3s var(--easing-snap);
+        }
+        
+        .knife-card:nth-child(even) {
+            margin-top: 50px;
+        }
+
+        .knife-card:hover {
+            transform: translateY(-10px);
+            background: #1c0000;
+        }
+
+        .quote-text {
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #ccc;
+        }
+
+        .chapter-title {
+            font-size: 0.8rem;
+            color: var(--red-bright);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .video-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 30px;
+            padding-bottom: 100px;
+        }
+        
+        .bilibili-embed-card {
+            background: #111;
+            border: 1px solid #333;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s var(--easing-snap), border-color 0.3s;
+        }
+
+        .bilibili-embed-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--red-primary);
+            box-shadow: 0 10px 30px rgba(138, 0, 0, 0.3);
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-title {
+            padding: 15px;
+            font-family: var(--font-serif);
+            font-size: 0.9rem;
+            color: #999;
+            background: #0a0a0a;
+            border-top: 1px solid #222;
+        }
+
+        .music-section {
+            border-top: 1px solid #333;
+            border-bottom: 1px solid #333;
+            min-height: 50vh;
+            display: flex;
+            align-items: center;
+            font-family: var(--font-serif);
+        }
+
+        .vinyl-container {
+            width: 90%;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .music-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .music-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .music-item {
+            padding: 15px;
+            border-bottom: 1px solid #222;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .music-item:hover, .music-item.active {
+            color: var(--red-bright);
+            padding-left: 20px;
+            border-bottom-color: var(--red-primary);
+            background: linear-gradient(90deg, rgba(138,0,0,0.1) 0%, transparent 100%);
+        }
+
+        .song-title {
+            flex: 1;
+            font-family: var(--font-serif);
+            font-size: 1.05rem;
+        }
+
+        .song-artist {
+            font-size: 0.8rem;
+            color: #666;
+            margin-left: 10px;
+            font-family: var(--font-sans);
+        }
+
+        .song-duration {
+            font-size: 0.85rem;
+            color: #555;
+            font-family: monospace;
+        }
+
+        .player-status {
+            font-size: 0.8rem;
+            opacity: 0.5;
+            letter-spacing: 3px;
+            margin-top: 10px;
+        }
+
+        .visualizer {
+            display: flex;
+            gap: 3px;
+            height: 50px;
+            align-items: flex-end;
+            margin-top: 20px;
+        }
+        .bar {
+            width: 6px;
+            background: var(--red-primary);
+            animation: bounce 1s infinite ease;
+            border-radius: 1px;
+        }
+
+        @keyframes bounce {
+            0%, 100% { height: 10% }
+            50% { height: 75% }
+        }
+
+        .update-tag {
+            background: var(--red-primary);
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 5px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 10;
+        }
+
+        .footer {
+            padding: 50px 20px;
+            text-align: center;
+            background: #000;
+        }
+
+        .copyright-logo {
+            max-width: 200px;
+            filter: grayscale(100%);
+            transition: filter 0.3s;
+            mix-blend-mode: screen;
+        }
+        .copyright-logo:hover {
+            filter: grayscale(0%);
+        }
+
+        @media (max-width: 768px) {
+            .dramatic-title {
+                font-size: 2.5rem;
+            }
+            .main-logo-text {
+                font-size: 3.5rem;
+                letter-spacing: 8px;
+            }
+            .video-section {
+                grid-template-columns: 1fr;
+            }
+            .character-box {
+                margin-right: 0;
+                margin-top: 40px;
+            }
+            .vinyl-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="noise-overlay"></div>
+
+    <header>
+        <div style="padding: 20px; font-family:var(--font-serif); font-size: 12px; color: #666;">
+            THEATRE OF <br> THREE-NINE AUDIO DOMAIN
+        </div>
+    </header>
+
+    <section class="intro-section" id="hero">
+        <div style="flex:1; margin-left: 5vw; z-index:10; pointer-events:none;">
+            <div style="margin-bottom: 30px; pointer-events: auto;">
+                <h2 class="main-logo-text">
+                    我不是戏神
+                </h2>
+                <span class="sub-author-text">三九音域</span>
+            </div>
+
+            <p style="color:var(--red-primary); letter-spacing: 5px; margin-bottom: -10px;">PROTAGONIST</p>
+            <h1 class="dramatic-title" style="font-size: 6rem; line-height: 1; pointer-events:auto;">
+                陈<br>伶
+            </h1>
+            <p style="max-width: 400px; line-height: 1.8; color: #999; pointer-events:auto;">
+                时代的舞台上，无人能分清戏里戏外。<br>
+                在这个即将崩坏的世界，既然无法反抗这既定的剧本，<br>
+                那我便化身为——<b>那抹最不确定的红。</b>
+            </p>
+        </div>
+
+        <div class="character-box">
+            <div class="character-img-placeholder" id="chenling-img-container">
+                <img src="https://ts1.tc.mm.bing.net/th/id/OIP-C.-mf1d1DqPUuMWt78AD1IgQHaJ4?rs=1&pid=ImgDetMain&o=7&rm=3" 
+                     alt="陈伶" 
+                     class="character-img-real" 
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <span style="color:white; z-index:2; display:none; position:absolute;">Chen Ling Image (Failed to load)</span>
+            </div>
+            <button class="voice-play-btn" onclick="playVoice()">
+                ► 播放语音：陈伶的话
+            </button>
+        </div>
+    </section>
+
+    <section class="knives-section">
+        <h2 class="dramatic-title">刀片分发处 <span style="font-size:1rem; opacity:0.5; margin-left:10px;">/// 实时同步</span></h2>
+        
+        <div class="scrolling-wrapper" id="knife-container">
+            <div class="knife-card">
+                <span class="chapter-title">LOADING ORACLE...</span>
+            </div>
+        </div>
+        <p style="font-size: 12px; color: #444; margin-top: 10px; margin-left: 20px;">数据源：番茄小说 / 22biqu (Simulated)</p>
+    </section>
+
+    <section>
+        <h2 class="dramatic-title">观众席 <span style="font-size:1rem; opacity:0.5;">/// Bilibili Feed</span></h2>
+        <div class="video-section" id="bili-container">
+            
+            <div class="bilibili-embed-card">
+                <div class="video-container">
+                    <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=115706855167735&bvid=BV1xpmmBfE85&cid=34697317871&p=1&autoplay=0" 
+                            scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                </div>
+                <div class="video-title">【无相之王|《我不是戏神》陈伶原创个人曲】</div>
+            </div>
+
+            <div class="bilibili-embed-card">
+                <div class="video-container">
+                    <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=115956567317761&bvid=BV125zxBjEBq&cid=35610625451&p=1&autoplay=0" 
+                            scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                </div>
+                <div class="video-title">【我不是戏神/简长生】我的悲伤是水做的</div>
+            </div>
+
+            <div class="bilibili-embed-card">
+                <div class="video-container">
+                    <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=113600693798904&bvid=BV1aQidYGEcV&cid=27196129722&p=1&autoplay=0" 
+                            scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                </div>
+                <div class="video-title">【我不是戏神/原创曲】⚡戏神道⚡我把灯燃戏唱红袍亮（填词/混剪pv）</div>
+            </div>
+
+            <div class="bilibili-embed-card">
+                <div class="video-container">
+                    <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=113209231086833&bvid=BV1yKxFeFE9d&cid=26030899495&p=1&autoplay=0" 
+                            scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                </div>
+                <div class="video-title">【我不是戏神】⚡废墟上 哭又笑 众看官听分晓⚡</div>
+            </div>
+
+            <div class="bilibili-embed-card">
+                <div class="video-container">
+                    <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=114928845325425&bvid=BV12C85z5EKC&cid=31327650228&p=1&autoplay=0" 
+                            scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                </div>
+                <div class="video-title">愚弄众生的猩红主宰，戏谑命运的无相之王（崩铁×我不是戏神）</div>
+            </div>
+
+            <div class="bilibili-embed-card">
+                <div class="video-container">
+                    <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=1851530773&bvid=BV1SW421F7Pp&cid=1466493683&p=1&autoplay=0" 
+                            scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                </div>
+                <div class="video-title">三九：新书《我不是戏神》百万字已肥可宰啦～</div>
+            </div>
+
+            <div class="bilibili-embed-card">
+                <div class="video-container">
+                    <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=114635848024253&bvid=BV12yTKzwEBS&cid=30350380000&p=1&autoplay=0" 
+                            scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                </div>
+                <div class="video-title">【原创动画】《好戏开场》鬼潮深渊的猩红主宰，戏谑命运的无相之王--《我不是戏神》</div>
+            </div>
+
+            <div class="bilibili-embed-card">
+                <div class="video-container">
+                    <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=115309402920850&bvid=BV13xHVzbEmc&cid=25874603171&p=1&autoplay=0" 
+                            scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                </div>
+                <div class="video-title">论早期红王为保护徒弟与白银之王李莱德的较量</div>
+            </div>
+
+            <div class="bilibili-embed-card">
+                <div class="video-container">
+                    <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=1556351089&bvid=BV1d142147Ch&cid=1650395774&p=1&autoplay=0" 
+                            scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                </div>
+                <div class="video-title">【嘲】——《我不是戏神》真人有声书主题曲丨“现在，好戏开场”</div>
+            </div>
+
+            <div class="bilibili-embed-card">
+                <div class="video-container">
+                    <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=114126458193240&bvid=BV1BKRpYzE1T&cid=28761066947&p=1&autoplay=0" 
+                            scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                </div>
+                <div class="video-title">一些戏神的弔图</div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="music-section">
+        <div class="vinyl-container">
+            <div style="min-width: 200px;">
+                <h3 style="color:var(--text-main); font-size: 2rem; margin-bottom: 20px;">剧院<br>原声</h3>
+                <div class="visualizer" id="visualizer">
+                </div>
+                <div class="player-status" id="player-status">WAITING...</div>
+            </div>
+
+            <div class="music-info">
+                <ul class="music-list">
+                    <li class="music-item" onclick="playMusic('https://cdn.jsdelivr.net/gh/hmq151/I-m-Not-a-Theatre-God-Tribute@main/music%20and%20video/%E5%A6%96%E7%BF%8E%20-%20%E7%B0%8C%E6%9C%88%E3%80%90%E5%89%A7%E6%83%85%E7%89%88%E3%80%91.mp3', '簌月【剧情版】', '簌月', this)">
+                        <span class="song-title">01. 簌月剧情版<span class="song-artist">妖翎</span></span>
+                        <span class="song-duration">03:45</span>
+                    </li>
+                    <li class="music-item" onclick="playMusic('https://cdn.jsdelivr.net/gh/hmq151/I-m-Not-a-Theatre-God-Tribute@main/music%20and%20video/%E5%B0%8F%E6%9B%B2%E5%84%BF%26OneOne%20-%20%E5%98%B2.mp3', '嘲', '小曲儿 & OneOne', this)">
+                        <span class="song-title">02. 嘲<span class="song-artist">小曲儿 & OneOne</span></span>
+                        <span class="song-duration">04:12</span>
+                    </li>
+                    <li class="music-item" onclick="playMusic('https://cdn.jsdelivr.net/gh/hmq151/I-m-Not-a-Theatre-God-Tribute@main/music%20and%20video/%E6%85%95%E6%B9%8E%EF%BC%88ll%E4%BA%94%E8%8A%B1%E8%82%89%EF%BC%89%26%E4%B8%80%E6%B8%85%E6%B8%85%E6%B8%85%20-%20%E9%87%8D%E5%90%AF%C2%B7IQGNOHC--%E3%80%8A%E6%88%91%E4%B8%8D%E6%98%AF%E6%88%8F%E7%A5%9E%E3%80%8B%E5%8E%9F%E5%88%9B%E6%A6%82%E5%BF%B5%E5%90%8C%E4%BA%BA%E6%9B%B2.mp3', '重启·IQGNOHC', '原创概念同人曲', this)">
+                        <span class="song-title">03. 重启·IQGNOHC原创概念同人曲<span class="song-artist">慕渺（ll五花肉）&一清清清</span></span>
+                        <span class="song-duration">04:05</span>
+                    </li>
+                    <li class="music-item" onclick="playMusic('https://cdn.jsdelivr.net/gh/hmq151/I-m-Not-a-Theatre-God-Tribute@main/music%20and%20video/%E6%B0%B4%E7%A6%B9%20-%20%E5%AE%89%E9%AD%82%E8%B0%A3.mp3', '安魂谣', '水禹', this)">
+                        <span class="song-title">04. 安魂谣<span class="song-artist">水禹</span></span>
+                        <span class="song-duration">03:28</span>
+                    </li>
+                    <li class="music-item" onclick="playMusic('https://cdn.jsdelivr.net/gh/hmq151/I-m-Not-a-Theatre-God-Tribute@main/music%20and%20video/%E6%B2%90%E5%8F%AF%E5%84%BF%20-%20%E6%88%91%E4%BB%AC%E5%9C%A8%E7%9C%8B%E7%9D%80%E4%BD%A0.mp3', '我们在看着你', '沐可儿', this)">
+                        <span class="song-title">05. 我们在看着你<span class="song-artist">沐可儿</span></span>
+                        <span class="song-duration">03:55</span>
+                    </li>
+                    <li class="music-item" onclick="playMusic('https://cdn.jsdelivr.net/gh/hmq151/I-m-Not-a-Theatre-God-Tribute@main/music%20and%20video/%E6%B6%B5%E5%8D%81%E5%85%AD%26%E5%8F%B8%E9%9F%B3_siyin%26%E4%B8%9C%E8%A5%BF%26%E6%99%AF%E5%BA%8FDasein%26%E7%BE%B2%E5%92%8C%26%E9%85%BF%E9%85%92%E4%B8%8D%E4%BC%9A%E9%85%BF%E9%85%92%26%E5%8D%83%E6%B9%9B%20-%20%E6%97%A0%E7%9B%B8%E4%B9%8B%E7%8E%8BMP3%E5%85%8D%E8%B4%B9%E4%B8%8B%E8%BD%BD%2C%E6%97%A0%E7%9B%B8%E4%B9%8B%E7%8E%8BLRC%E6%AD%8C%E8%AF%8D%E4%B8%8B%E8%BD%BD-%E7%88%B1%E5%90%AC%E9%9F%B3%E4%B9%90%E7%BD%91%20www.2t58.com.aac', '无相之王', '涵十六、司音_siyin、东西、景序Dasein、羲和', this)">
+                        <span class="song-title">06. 无相之王<span class="song-artist">涵十六、司音_siyin、东西、景序Dasein、羲和</span></span>
+                        <span class="song-duration">04:20</span>
+                    </li>
+                </ul>
+                <audio id="main-audio" controls style="width: 100%; margin-top: 20px; filter: invert(0.9);"></audio>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <h3 style="font-size: 0.8rem; margin-bottom: 20px; color: #444;">TECHNOLOGY SUPPORT</h3>
+        <img src="https://r2.xsimple-r2.com/files/491630/4774a1cf-2285-48e0-9d63-07c27708f57f.png" alt="迅星科技 XKUNXING KEJI" class="copyright-logo">
+        <br><br>
+        <p style="font-size: 10px; color: #333; font-family: var(--font-sans);">
+            DEVELOPED BY Xunxing Technology Studio | FAN MEMORIAL SITE | NOT AFFILIATED WITH THREE-NINE
+        </p>
+    </footer>
+
+    <script>
+        // 初始化视觉动画
+        const visualizer = document.getElementById('visualizer');
+        for(let i=0; i<12; i++){
+            let bar = document.createElement('div');
+            bar.className = 'bar';
+            bar.style.animationDuration = (Math.random() * 0.5 + 0.5) + 's';
+            bar.style.animationDelay = (i * 0.1) + 's';
+            visualizer.appendChild(bar);
+        }
+
+        // 刀子语录
+        const knifeData = [
+            { ch: "第534章", title: "红衣降临", text: "即使世界已经遗忘了他的名字，那抹红衣依旧在废墟之上起舞。他不是神，他是——戏子。" },
+            { ch: "第535章", title: "神明的黄昏", text: "刀尖划过咽喉的触感，是那么的凉...陈伶笑着用手指抹去鲜血，妆容未乱。" },
+            { ch: "第536章", title: "无法停止的演出", text: "观众还在看着，我又怎能谢幕？即便灵魂已被撕碎，我的戏，还没唱完！" },
+            { ch: "最新章", title: "致死方休", text: "（实时更新检测中...）这不仅仅是结局，这是新的开始。" }
+        ];
+
+        const knifeContainer = document.getElementById('knife-container');
+        knifeContainer.innerHTML = '';
+        
+        knifeData.forEach((k, index) => {
+            let card = document.createElement('div');
+            card.className = 'knife-card';
+            card.innerHTML = `
+                <span class="chapter-title">${k.ch} // ${k.title}</span>
+                <p class="quote-text">“${k.text}”</p>
+                ${index === knifeData.length - 1 ? '<div class="update-tag">NEW</div>' : ''}
+            `;
+            knifeContainer.appendChild(card);
+        });
+
+        // ========== 音频系统隔离修复 ==========
+        
+        // 1. 陈伶语音播放器（独立 Audio 对象）
+        let voiceAudio = null;
+        
+        function playVoice() {
+            // 如果正在播放，先停止
+            if (voiceAudio) {
+                voiceAudio.pause();
+                voiceAudio = null;
+            }
+            
+            // 创建新的音频实例 - 请确保这个链接是有效的 MP3 直链！
+            // 注意：你之前的链接是临时 CDN 链接，已过期，请换成稳定链接
+            voiceAudio = new Audio();
+            voiceAudio.src = 'https://cdn.jsdelivr.net/gh/hmq151/I-m-Not-a-Theatre-God-Tribute@main/music%20and%20video/m7a7w-43c5e.mp3'; // 请确认此链接有效
+            
+            voiceAudio.play().then(() => {
+                console.log('语音播放开始');
+            }).catch(e => {
+                console.error('语音播放失败:', e);
+                alert('语音加载失败，请检查音频链接是否过期');
+                voiceAudio = null;
+            });
+        }
+
+        // 2. 音乐播放器（使用页面内的 <audio> 标签，完全独立）
+        function playMusic(url, songName, artist, userClickElement) {
+            const player = document.getElementById('main-audio');
+            const status = document.getElementById('player-status');
+            const bars = document.querySelectorAll('.bar');
+            
+            // 更新 UI
+            document.querySelectorAll('.music-item').forEach(i => i.classList.remove('active'));
+            if(userClickElement) userClickElement.classList.add('active');
+
+            // 设置音乐源并播放
+            player.src = url;
+            
+            status.innerHTML = `NOW PLAYING:<br><span style="color:var(--red-primary);">${songName}</span> <span style="font-size:0.7em; opacity:0.7;">// ${artist}</span>`;
+            
+            bars.forEach(bar => {
+                bar.style.background = "#ff1a1a";
+                bar.style.animationDuration = (Math.random() * 0.3 + 0.4) + 's';
+            });
+
+            player.play().then(() => {
+                console.log('音乐播放开始:', songName);
+            }).catch(e => {
+                console.error('音乐播放失败:', e);
+                status.innerText = "CLICK PLAY TO START";
+            });
+
+            player.onended = function() {
+                bars.forEach(bar => {
+                    bar.style.background = "#8a0000";
+                    bar.style.animationDuration = "1s";
+                });
+                status.innerText = "WAITING...";
+                document.querySelectorAll('.music-item').forEach(i => i.classList.remove('active'));
+            };
+        }
+
+        // 初始化音乐播放器状态
+        window.addEventListener('load', () => {
+            const status = document.getElementById('player-status');
+            status.innerHTML = "SELECT A TRACK<br><span style='font-size:0.8em; opacity:0.5;'>点击曲目开始播放</span>";
+        });
+    </script>
+</body>
+</html>
