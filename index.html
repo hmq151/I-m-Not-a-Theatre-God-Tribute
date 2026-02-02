@@ -542,6 +542,15 @@
                 <div class="video-title">一些戏神的弔图</div>
             </div>
 
+            <!-- 视频 11 (新增 BV16kR3YLEX6) -->
+            <div class="bilibili-embed-card">
+                <div class="video-container">
+                    <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=114135702440930&bvid=BV16kR3YLEX6&cid=28788460315&p=1&autoplay=0" 
+                            scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                </div>
+                <div class="video-title">戏神陈伶·祭神舞微电影</div>
+            </div>
+
         </div>
     </section>
 
@@ -640,10 +649,9 @@
                 voiceAudio = null;
             }
             
-            // 创建新的音频实例 - 请确保这个链接是有效的 MP3 直链！
-            // 注意：你之前的链接是临时 CDN 链接，已过期，请换成稳定链接
+            // 创建新的音频实例
             voiceAudio = new Audio();
-            voiceAudio.src = 'https://cdn.jsdelivr.net/gh/hmq151/I-m-Not-a-Theatre-God-Tribute@main/music%20and%20video/m7a7w-43c5e.mp3'; // 请确认此链接有效
+            voiceAudio.src = 'https://cdn.jsdelivr.net/gh/hmq151/I-m-Not-a-Theatre-God-Tribute@main/music%20and%20video/m7a7w-43c5e.mp3';
             
             voiceAudio.play().then(() => {
                 console.log('语音播放开始');
