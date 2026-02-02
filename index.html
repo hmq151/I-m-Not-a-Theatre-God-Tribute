@@ -73,36 +73,24 @@
             transform: skewX(-20deg);
         }
 
-        .main-logo-text {
-            font-family: 'STXingkai', 'Xingkai SC', 'KaiTi', '楷体', cursive;
-            font-size: 5.5rem;
-            font-weight: bold;
-            color: var(--red-bright);
-            text-shadow: 
-                0 0 20px rgba(255, 26, 26, 0.6),
-                0 0 40px rgba(138, 0, 0, 0.4),
-                4px 4px 0px rgba(0, 0, 0, 0.8);
-            letter-spacing: 15px;
-            line-height: 1.1;
-            transform: rotate(-3deg) skewX(-5deg);
-            display: inline-block;
-            margin-bottom: 10px;
-            margin-left: -10px;
+        /* ----- Logo 图片样式 ----- */
+        .logo-container {
+            margin-bottom: 30px;
             pointer-events: auto;
+            display: flex;
+            align-items: flex-start;
         }
 
-        .sub-author-text {
-            font-family: 'STXingkai', 'KaiTi', serif;
-            font-size: 1rem;
-            color: #666;
-            writing-mode: vertical-rl;
-            text-orientation: upright;
-            letter-spacing: 5px;
-            margin-left: 15px;
-            display: inline-block;
-            vertical-align: top;
-            margin-top: 10px;
-            opacity: 0.7;
+        .logo-img {
+            max-width: 400px;
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 0 20px rgba(138, 0, 0, 0.5));
+            transition: transform 0.3s var(--easing-snap);
+        }
+
+        .logo-img:hover {
+            transform: scale(1.02);
         }
 
         .intro-section {
@@ -386,9 +374,8 @@
             .dramatic-title {
                 font-size: 2.5rem;
             }
-            .main-logo-text {
-                font-size: 3.5rem;
-                letter-spacing: 8px;
+            .logo-img {
+                max-width: 280px;
             }
             .video-section {
                 grid-template-columns: 1fr;
@@ -415,11 +402,16 @@
 
     <section class="intro-section" id="hero">
         <div style="flex:1; margin-left: 5vw; z-index:10; pointer-events:none;">
-            <div style="margin-bottom: 30px; pointer-events: auto;">
-                <h2 class="main-logo-text">
+            
+            <!-- Logo 图片（替换为截图中的红色书法 logo） -->
+            <div class="logo-container">
+                <img src="https://cdn.jsdelivr.net/gh/hmq151/I-m-Not-a-Theatre-God-Tribute@main/music%20and%20video/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202026-02-02%20212054.png" 
+                     alt="我不是戏神" 
+                     class="logo-img"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <div style="display:none; color:var(--red-bright); font-family:'STXingkai', cursive; font-size:4rem;">
                     我不是戏神
-                </h2>
-                <span class="sub-author-text">三九音域</span>
+                </div>
             </div>
 
             <p style="color:var(--red-primary); letter-spacing: 5px; margin-bottom: -10px;">PROTAGONIST</p>
@@ -462,6 +454,7 @@
         <h2 class="dramatic-title">观众席 <span style="font-size:1rem; opacity:0.5;">/// Bilibili Feed</span></h2>
         <div class="video-section" id="bili-container">
             
+            <!-- 视频 1-11 （原有） -->
             <div class="bilibili-embed-card">
                 <div class="video-container">
                     <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=115706855167735&bvid=BV1xpmmBfE85&cid=34697317871&p=1&autoplay=0" 
@@ -531,7 +524,7 @@
                     <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=1556351089&bvid=BV1d142147Ch&cid=1650395774&p=1&autoplay=0" 
                             scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
                 </div>
-                <div class="video-title">【嘲】——《我不是戏神》真人有声书主题曲丨“现在，好戏开场”</div>
+                <div class="video-title">【嘲】——《我不是戏神》真人有声书主题曲丨"现在，好戏开场"</div>
             </div>
 
             <div class="bilibili-embed-card">
@@ -542,13 +535,53 @@
                 <div class="video-title">一些戏神的弔图</div>
             </div>
 
-            <!-- 视频 11 (新增 BV16kR3YLEX6) -->
             <div class="bilibili-embed-card">
                 <div class="video-container">
                     <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=114135702440930&bvid=BV16kR3YLEX6&cid=28788460315&p=1&autoplay=0" 
                             scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
                 </div>
                 <div class="video-title">戏神陈伶·祭神舞微电影</div>
+            </div>
+
+            <!-- 视频 12-16 （新增） -->
+            <div class="bilibili-embed-card">
+                <div class="video-container">
+                    <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=113532410534401&bvid=BV1kQB2YMEYp&cid=26937721077&p=1&autoplay=0" 
+                            scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                </div>
+                <div class="video-title">戏神手书——《红尘》</div>
+            </div>
+
+            <div class="bilibili-embed-card">
+                <div class="video-container">
+                    <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=113145293184499&bvid=BV1Yi49eAEKq&cid=25879186609&p=1&autoplay=0" 
+                            scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                </div>
+                <div class="video-title">【简长生/我不是戏神手书】免我蹉跎苦</div>
+            </div>
+
+            <div class="bilibili-embed-card">
+                <div class="video-container">
+                    <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=114849388431562&bvid=BV1RDuYzfEQ7&cid=31021203920&p=1&autoplay=0" 
+                            scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                </div>
+                <div class="video-title">【我不是戏神/群像】手书 成仙 “妙不可言”</div>
+            </div>
+
+            <div class="bilibili-embed-card">
+                <div class="video-container">
+                    <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=115098160989823&bvid=BV1EkekzWEa5&cid=31966301099&p=1&autoplay=0" 
+                            scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                </div>
+                <div class="video-title">【我不是戏神】请不要带我走</div>
+            </div>
+
+            <div class="bilibili-embed-card">
+                <div class="video-container">
+                    <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=114590364999469&bvid=BV1o67GzsENr&cid=30211444511&p=1&autoplay=0" 
+                            scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                </div>
+                <div class="video-title">光敏警告⚠【我不是戏神/陈伶/meme】</div>
             </div>
 
         </div>
@@ -631,25 +664,21 @@
             card.className = 'knife-card';
             card.innerHTML = `
                 <span class="chapter-title">${k.ch} // ${k.title}</span>
-                <p class="quote-text">“${k.text}”</p>
+                <p class="quote-text">"${k.text}"</p>
                 ${index === knifeData.length - 1 ? '<div class="update-tag">NEW</div>' : ''}
             `;
             knifeContainer.appendChild(card);
         });
 
-        // ========== 音频系统隔离修复 ==========
-        
-        // 1. 陈伶语音播放器（独立 Audio 对象）
+        // 音频系统
         let voiceAudio = null;
         
         function playVoice() {
-            // 如果正在播放，先停止
             if (voiceAudio) {
                 voiceAudio.pause();
                 voiceAudio = null;
             }
             
-            // 创建新的音频实例
             voiceAudio = new Audio();
             voiceAudio.src = 'https://cdn.jsdelivr.net/gh/hmq151/I-m-Not-a-Theatre-God-Tribute@main/music%20and%20video/m7a7w-43c5e.mp3';
             
@@ -662,17 +691,14 @@
             });
         }
 
-        // 2. 音乐播放器（使用页面内的 <audio> 标签，完全独立）
         function playMusic(url, songName, artist, userClickElement) {
             const player = document.getElementById('main-audio');
             const status = document.getElementById('player-status');
             const bars = document.querySelectorAll('.bar');
             
-            // 更新 UI
             document.querySelectorAll('.music-item').forEach(i => i.classList.remove('active'));
             if(userClickElement) userClickElement.classList.add('active');
 
-            // 设置音乐源并播放
             player.src = url;
             
             status.innerHTML = `NOW PLAYING:<br><span style="color:var(--red-primary);">${songName}</span> <span style="font-size:0.7em; opacity:0.7;">// ${artist}</span>`;
@@ -699,7 +725,6 @@
             };
         }
 
-        // 初始化音乐播放器状态
         window.addEventListener('load', () => {
             const status = document.getElementById('player-status');
             status.innerHTML = "SELECT A TRACK<br><span style='font-size:0.8em; opacity:0.5;'>点击曲目开始播放</span>";
