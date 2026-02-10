@@ -202,6 +202,164 @@
             display: block;
         }
 
+        /* ----- 查看更多链接卡片样式 ----- */
+        .knife-card.view-more-card {
+            background: linear-gradient(135deg, #1a0000, #0a0a0a);
+            border: 2px solid var(--red-primary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--text-main);
+            cursor: pointer;
+            min-height: 200px;
+        }
+
+        .knife-card.view-more-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--red-primary);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1;
+        }
+
+        .knife-card.view-more-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--red-bright);
+            box-shadow: 0 10px 30px rgba(138, 0, 0, 0.3);
+            background: #1a0000;
+        }
+
+        .knife-card.view-more-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .view-more-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .view-more-title {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .view-more-subtitle {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .view-more-arrow {
+            font-size: 2rem;
+            margin-top: 15px;
+            color: var(--red-bright);
+            transition: transform 0.3s;
+        }
+
+        .knife-card.view-more-card:hover .view-more-arrow {
+            transform: translateX(5px);
+        }
+
+        /* ----- 图库样式 ----- */
+        .gallery-section {
+            background-color: #0a0a0a;
+            overflow: hidden;
+        }
+
+        .gallery-wrapper {
+            display: flex;
+            gap: 20px;
+            align-items: stretch;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .gallery-item {
+            flex: 1;
+            min-width: 300px;
+            max-width: 400px;
+            background: #141414;
+            border-left: 4px solid var(--red-primary);
+            overflow: hidden;
+            position: relative;
+            transition: transform 0.3s var(--easing-snap);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            background: #1c0000;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            filter: grayscale(100%) contrast(120%);
+            transition: filter 0.5s var(--easing-snap);
+        }
+
+        .gallery-item:hover img {
+            filter: grayscale(0%) sepia(20%) saturate(200%) hue-rotate(-20deg);
+        }
+
+        .gallery-more {
+            flex: 0 0 auto;
+            min-width: 200px;
+            background: linear-gradient(135deg, #1a0000, #0a0a0a);
+            border: 2px solid var(--red-primary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 30px;
+            text-decoration: none;
+            color: var(--text-main);
+            transition: all 0.3s var(--easing-snap);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-more::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--red-primary);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1;
+        }
+
+        .gallery-more:hover {
+            transform: translateY(-5px);
+            border-color: var(--red-bright);
+            box-shadow: 0 10px 30px rgba(138, 0, 0, 0.3);
+        }
+
+        .gallery-more:hover::before {
+            opacity: 0.1;
+        }
+
+        .gallery-more span {
+            position: relative;
+            z-index: 2;
+        }
+
+        .gallery-more:hover span:first-child {
+            color: var(--red-bright);
+        }
+
         .video-section {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
@@ -387,8 +545,17 @@
             .vinyl-container {
                 flex-direction: column;
             }
+            .gallery-wrapper {
+                flex-direction: column;
+            }
+            .gallery-item, .gallery-more {
+                max-width: 100% !important;
+                width: 100%;
+            }
         }
     </style>
+<base target="_blank">
+<base target="_blank">
 </head>
 <body>
 
@@ -440,7 +607,7 @@
     </section>
 
     <section class="knives-section">
-        <h2 class="dramatic-title">刀片分发处 <span style="font-size:1rem; opacity:0.5; margin-left:10px;">/// 实时同步</span></h2>
+        <h2 class="dramatic-title">刀子文分发处 <span style="font-size:1rem; opacity:0.5; margin-left:10px;">/// 实时同步</span></h2>
         
         <div class="scrolling-wrapper" id="knife-container">
             <div class="knife-card">
@@ -448,6 +615,30 @@
             </div>
         </div>
         <p style="font-size: 12px; color: #444; margin-top: 10px; margin-left: 20px;">数据源：番茄小说 / 22biqu (Simulated)</p>
+    </section>
+
+    <!-- 图库 Section -->
+    <section class="gallery-section">
+        <h2 class="dramatic-title">图库 <span style="font-size:1rem; opacity:0.5; margin-left:10px;">/// Gallery</span></h2>
+        
+        <div class="gallery-wrapper">
+            <div class="gallery-item">
+                <img src="https://cdn.jsdelivr.net/gh/hmq151/I-m-Not-a-Theatre-God-Tribute@main/picture/2720a0775056bed3bd8bb04e369173cd3493114874431947.jpg" 
+                     alt="戏神同人图1"
+                     onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'padding: 20px; color: #666; text-align: center; height: 300px; display: flex; align-items: center; justify-content: center;\'>图片加载失败</div>'">
+            </div>
+            
+            <div class="gallery-item">
+                <img src="https://cdn.jsdelivr.net/gh/hmq151/I-m-Not-a-Theatre-God-Tribute@main/picture/3c92e52d78c0b44ebd0ac0cbe2a24f743493114874431947.png" 
+                     alt="戏神同人图2"
+                     onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'padding: 20px; color: #666; text-align: center; height: 300px; display: flex; align-items: center; justify-content: center;\'>图片加载失败</div>'">
+            </div>
+            
+            <a href="https://i-m-not-a-theatre-god-tribute-picture.netlify.app/" target="_blank" class="gallery-more">
+                <span style="font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 10px;">查看更多</span>
+                <span style="font-size: 0.8rem; color: #666;">View More →</span>
+            </a>
+        </div>
     </section>
 
     <section>
@@ -543,7 +734,7 @@
                 <div class="video-title">戏神陈伶·祭神舞微电影</div>
             </div>
 
-            <!-- 视频 12-16 （新增） -->
+            <!-- 视频 12-16 （原有新增） -->
             <div class="bilibili-embed-card">
                 <div class="video-container">
                     <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=113532410534401&bvid=BV1kQB2YMEYp&cid=26937721077&p=1&autoplay=0" 
@@ -565,7 +756,7 @@
                     <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=114849388431562&bvid=BV1RDuYzfEQ7&cid=31021203920&p=1&autoplay=0" 
                             scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
                 </div>
-                <div class="video-title">【我不是戏神/群像】手书 成仙 “妙不可言”</div>
+                <div class="video-title">【我不是戏神/群像】手书 成仙 "妙不可言"</div>
             </div>
 
             <div class="bilibili-embed-card">
@@ -582,6 +773,47 @@
                             scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
                 </div>
                 <div class="video-title">光敏警告⚠【我不是戏神/陈伶/meme】</div>
+            </div>
+
+            <!-- 视频 17-21 （本次新增） -->
+            <div class="bilibili-embed-card">
+                <div class="video-container">
+                    <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=114227742312834&bvid=BV1jboeY3Euo&cid=29077078482&p=1&autoplay=0" 
+                            scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                </div>
+                <div class="video-title">用机械傩舞给同学们一点震撼</div>
+            </div>
+
+            <div class="bilibili-embed-card">
+                <div class="video-container">
+                    <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=1104680337&bvid=BV1Qw4m1S7gh&cid=1544639058&p=1&autoplay=0" 
+                            scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                </div>
+                <div class="video-title">仿生机械傀儡｜"宴啊…我不是戏神"</div>
+            </div>
+
+            <div class="bilibili-embed-card">
+                <div class="video-container">
+                    <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=113209214240675&bvid=BV1JVxFesEQr&cid=26030705699&p=1&autoplay=0" 
+                            scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                </div>
+                <div class="video-title">"请在不低于3000个观众的注视下，完成一场杀人表演"杀疯了！不愧是三九文笔巅峰！就喜欢这种又疯又帅的！！</div>
+            </div>
+
+            <div class="bilibili-embed-card">
+                <div class="video-container">
+                    <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=114602310373612&bvid=BV1Ur7PzQEma&cid=30249193256&p=1&autoplay=0" 
+                            scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                </div>
+                <div class="video-title">戏谑命运的无相之王</div>
+            </div>
+
+            <div class="bilibili-embed-card">
+                <div class="video-container">
+                    <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=1254507448&bvid=BV1LJ4m1N7SU&cid=1548470506&p=1&autoplay=0" 
+                            scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                </div>
+                <div class="video-title">我们见证众生的黄昏，我们追寻人类的黎明</div>
             </div>
 
         </div>
@@ -622,6 +854,50 @@
                         <span class="song-title">06. 无相之王<span class="song-artist">涵十六、司音_siyin、东西、景序Dasein、羲和</span></span>
                         <span class="song-duration">04:20</span>
                     </li>
+                    <li class="music-item" onclick="playMusic('https://cdn.jsdelivr.net/gh/hmq151/I-m-Not-a-Theatre-God-Tribute@main/music%20and%20video/%E5%BC%82%E5%B8%B8%20-%20%E6%88%91%E4%B8%8D%E6%98%AF%E6%88%8F%E7%A5%9E-%20(%E5%B0%8F%E8%AF%B4%E3%80%8A%E6%88%91%E4%B8%8D%E6%98%AF%E6%88%8F%E7%A5%9E%E3%80%8B%E5%90%8C%E5%90%8D%E6%9C%89%E5%A3%B0%E4%B9%A6%E5%AE%98%E6%96%B9%E6%8E%A8%E5%B9%BF%E6%9B%B2).mp3', '我不是戏神', '异常', this)">
+                        <span class="song-title">07. 我不是戏神<span class="song-artist">异常</span></span>
+                        <span class="song-duration">03:30</span>
+                    </li>
+                    <li class="music-item" onclick="playMusic('https://cdn.jsdelivr.net/gh/hmq151/I-m-Not-a-Theatre-God-Tribute@main/music%20and%20video/%E5%BC%82%E5%B8%B8%20-%20%E6%88%8F%E4%B8%AD%E9%AD%82%EF%BC%88%E5%B0%8F%E8%AF%B4%E3%80%8A%E6%88%91%E4%B8%8D%E6%98%AF%E6%88%8F%E7%A5%9E%E3%80%8B%E7%BB%88%E7%AB%A0%E5%90%8C%E5%90%8D%E6%9B%B2%EF%BC%89.mp3', '戏中魂', '异常', this)">
+                        <span class="song-title">08. 戏中魂<span class="song-artist">异常</span></span>
+                        <span class="song-duration">03:45</span>
+                    </li>
+                    <li class="music-item" onclick="playMusic('https://cdn.jsdelivr.net/gh/hmq151/I-m-Not-a-Theatre-God-Tribute@main/music%20and%20video/%E5%A7%9C%E5%B0%8F%E8%8A%B1%20-%20%E6%88%91%E4%B8%8D%E6%98%AF%E6%88%8F%E7%A5%9E%E4%B9%8B%E7%87%83%E9%AD%82%E6%9B%B2.mp3', '我不是戏神之燃魂曲', '姜小花', this)">
+                        <span class="song-title">09. 我不是戏神之燃魂曲<span class="song-artist">姜小花</span></span>
+                        <span class="song-duration">03:50</span>
+                    </li>
+                    <li class="music-item" onclick="playMusic('https://cdn.jsdelivr.net/gh/hmq151/I-m-Not-a-Theatre-God-Tribute@main/music%20and%20video/%E4%B8%80%E5%8F%AA%E6%A0%91%E6%87%92%20-%20%E9%93%B8%E7%BA%A2%E5%B0%98%EF%BC%88%E3%80%8A%E6%88%91%E4%B8%8D%E6%98%AF%E6%88%8F%E7%A5%9E%E3%80%8B%E7%BA%A2%E5%B0%98%E7%95%8C%E5%9F%9F%E5%85%88%E9%A9%B1%E8%87%B4%E6%95%AC%E6%9B%B2%EF%BC%89.mp3', '铸红尘', '一只树懒', this)">
+                        <span class="song-title">10. 铸红尘<span class="song-artist">一只树懒</span></span>
+                        <span class="song-duration">04:00</span>
+                    </li>
+                    <li class="music-item" onclick="playMusic('https://cdn.jsdelivr.net/gh/hmq151/I-m-Not-a-Theatre-God-Tribute@main/music%20and%20video/%E4%B8%80%E5%8F%AA%E6%A0%91%E6%87%92%20-%20%E6%9E%81%E5%85%89%E5%9F%8E%EF%BC%88%E3%80%8A%E6%88%91%E4%B8%8D%E6%98%AF%E6%88%8F%E7%A5%9E%E3%80%8B%E6%9E%81%E5%85%89%E5%9F%8E%E5%AE%88%E6%8A%A4%E6%9B%B2%EF%BC%89.mp3', '极光城', '一只树懒', this)">
+                        <span class="song-title">11. 极光城<span class="song-artist">一只树懒</span></span>
+                        <span class="song-duration">03:55</span>
+                    </li>
+                    <li class="music-item" onclick="playMusic('https://cdn.jsdelivr.net/gh/hmq151/I-m-Not-a-Theatre-God-Tribute@main/music%20and%20video/%E9%BE%99%E8%99%BE%E3%82%9E%EF%BC%8C%E5%8F%AA%E6%98%AF%E7%AC%91-%E6%9C%A8%E5%81%B6%E6%88%8F.mp3', '木偶戏', '龙虾ゞ，只是笑', this)">
+                        <span class="song-title">12. 木偶戏<span class="song-artist">龙虾ゞ，只是笑</span></span>
+                        <span class="song-duration">03:30</span>
+                    </li>
+                    <li class="music-item" onclick="playMusic('https://cdn.jsdelivr.net/gh/hmq151/I-m-Not-a-Theatre-God-Tribute@main/music%20and%20video/%E6%B2%A1%E6%97%A7%E7%9A%84%E5%B0%8F%E9%9D%9E%E5%B1%8B-%E3%80%8A%E4%BC%B6%E3%80%8B.mp3', '伶', '没旧的小非屋', this)">
+                        <span class="song-title">13. 伶<span class="song-artist">没旧的小非屋</span></span>
+                        <span class="song-duration">03:45</span>
+                    </li>
+                    <li class="music-item" onclick="playMusic('https://cdn.jsdelivr.net/gh/hmq151/I-m-Not-a-Theatre-God-Tribute@main/music%20and%20video/%E6%B2%A1%E6%97%A7%E7%9A%84%E5%B0%8F%E9%9D%9E%E5%B1%8B-%E3%80%8A%E6%88%8F%E7%BA%A2%E5%B0%98%E3%80%8B.mp3', '戏红尘', '没旧的小非屋', this)">
+                        <span class="song-title">14. 戏红尘<span class="song-artist">没旧的小非屋</span></span>
+                        <span class="song-duration">03:40</span>
+                    </li>
+                    <li class="music-item" onclick="playMusic('https://cdn.jsdelivr.net/gh/hmq151/I-m-Not-a-Theatre-God-Tribute@main/music%20and%20video/%E5%8D%81%E4%BA%8CMouse-%E3%80%8A%E7%AE%80%E9%95%BF%E7%94%9F%E3%80%8B.mp3', '简长生', '十二Mouse', this)">
+                        <span class="song-title">15. 简长生<span class="song-artist">十二Mouse</span></span>
+                        <span class="song-duration">03:35</span>
+                    </li>
+                    <li class="music-item" onclick="playMusic('https://cdn.jsdelivr.net/gh/hmq151/I-m-Not-a-Theatre-God-Tribute@main/music%20and%20video/%E8%8B%A5%E7%8E%96%E6%9A%AE%E7%92%83-%E3%80%8A%E9%BB%84%E6%98%8F%E5%B0%86%E8%87%B3%E3%80%8B.mp3', '黄昏将至', '若玖暮璃', this)">
+                        <span class="song-title">16. 黄昏将至<span class="song-artist">若玖暮璃</span></span>
+                        <span class="song-duration">04:00</span>
+                    </li>
+                    <li class="music-item" onclick="playMusic('https://cdn.jsdelivr.net/gh/hmq151/I-m-Not-a-Theatre-God-Tribute@main/music%20and%20video/%E8%B4%A6%E5%8F%B7%E5%B7%B2%E6%B3%A8%E9%94%80-%E6%88%91%E4%B8%8D%E6%98%AF%E6%88%8F%E7%A5%9E%E3%80%8A%E4%BA%BA%E7%B1%BB%E7%BE%A4%E6%98%9F%E9%97%AA%E8%80%80%E6%97%B6%E3%80%8B.mp3', '人类群星闪耀时', '账号已注销', this)">
+                        <span class="song-title">17. 人类群星闪耀时<span class="song-artist">账号已注销</span></span>
+                        <span class="song-duration">04:15</span>
+                    </li>
                 </ul>
                 <audio id="main-audio" controls style="width: 100%; margin-top: 20px; filter: invert(0.9);"></audio>
             </div>
@@ -650,25 +926,38 @@
 
         // 刀子语录
         const knifeData = [
-            { ch: "第534章", title: "红衣降临", text: "即使世界已经遗忘了他的名字，那抹红衣依旧在废墟之上起舞。他不是神，他是——戏子。" },
-            { ch: "第535章", title: "神明的黄昏", text: "刀尖划过咽喉的触感，是那么的凉...陈伶笑着用手指抹去鲜血，妆容未乱。" },
-            { ch: "第536章", title: "无法停止的演出", text: "观众还在看着，我又怎能谢幕？即便灵魂已被撕碎，我的戏，还没唱完！" },
-            { ch: "最新章", title: "致死方休", text: "（实时更新检测中...）这不仅仅是结局，这是新的开始。" }
+            { ch: "   ", title: "刀子1", text: "‘陈伶……’‘嗯？’‘我能问个问题吗？’‘什么？’‘从刚才开始……你就在和谁说话？’陈伶愣住了。" },
+            { ch: "  ", title: "刀子2", text: "刀尖划过咽喉的触感，是那么的凉...陈伶笑着用手指抹去鲜血，妆容未乱。" },
+            { ch: "  ", title: "刀子3", text: "观众还在看着，我又怎能谢幕？即便灵魂已被撕碎，我的戏，还没唱完！" }
         ];
 
         const knifeContainer = document.getElementById('knife-container');
         knifeContainer.innerHTML = '';
         
-        knifeData.forEach((k, index) => {
+        // 添加刀子卡片
+        knifeData.forEach((k) => {
             let card = document.createElement('div');
             card.className = 'knife-card';
             card.innerHTML = `
                 <span class="chapter-title">${k.ch} // ${k.title}</span>
                 <p class="quote-text">"${k.text}"</p>
-                ${index === knifeData.length - 1 ? '<div class="update-tag">NEW</div>' : ''}
             `;
             knifeContainer.appendChild(card);
         });
+
+        // 添加"查看更多"链接卡片
+        let viewMoreCard = document.createElement('a');
+        viewMoreCard.href = 'https://i-m-not-a-theatre-god-tribute-daozi.netlify.app/';
+        viewMoreCard.target = '_blank';
+        viewMoreCard.className = 'knife-card view-more-card';
+        viewMoreCard.innerHTML = `
+            <div class="view-more-content">
+                <span class="view-more-title">查看更多</span>
+                <span class="view-more-subtitle">View More →</span>
+                <div class="view-more-arrow">›</div>
+            </div>
+        `;
+        knifeContainer.appendChild(viewMoreCard);
 
         // 音频系统
         let voiceAudio = null;
