@@ -2,6 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <meta name="msvalidate.01" content="CA862A284E7CA8EDB89242BDD799C9EE" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>【我不是戏神】红衣时刻 - 纪念站</title>
     <style>
@@ -119,7 +120,7 @@
             justify-content: center;
             align-items: center;
         }
-        
+
         .character-img-real {
             width: 100%;
             height: 100%;
@@ -178,7 +179,7 @@
             position: relative;
             transition: transform 0.3s var(--easing-snap);
         }
-        
+
         .knife-card:nth-child(even) {
             margin-top: 50px;
         }
@@ -366,7 +367,7 @@
             gap: 30px;
             padding-bottom: 100px;
         }
-        
+
         .bilibili-embed-card {
             background: #111;
             border: 1px solid #333;
@@ -553,14 +554,123 @@
                 width: 100%;
             }
         }
-    
+
         .footer a:hover {
             transform: translateY(-5px);
         }
         .footer a:hover img {
             box-shadow: 0 0 20px rgba(138, 0, 0, 0.5);
         }
+
+        /* ----- 更多组织入口样式 ----- */
+        .org-entry-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 20px;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #1a0000, #0a0a0a);
+            border: 1px solid var(--red-primary);
+            color: var(--text-main);
+            text-decoration: none;
+            font-family: var(--font-serif);
+            font-size: 0.9rem;
+            transition: all 0.3s var(--easing-snap);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .org-entry-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--red-primary);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1;
+        }
+
+        .org-entry-link:hover {
+            border-color: var(--red-bright);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(138, 0, 0, 0.4);
+        }
+
+        .org-entry-link:hover::before {
+            opacity: 0.15;
+        }
+
+        .org-entry-link span {
+            position: relative;
+            z-index: 2;
+        }
+
+        .org-entry-link .arrow {
+            transition: transform 0.3s var(--easing-snap);
+        }
+
+        .org-entry-link:hover .arrow {
+            transform: translateX(5px);
+        }
+
+        /* 导航按钮样式 */
+        .nav-box {
+            display: inline-block;
+            padding: 8px 20px;
+            background: linear-gradient(135deg, #1a0000, #0a0a0a);
+            border: 1px solid var(--red-primary);
+            color: var(--text-main);
+            text-decoration: none;
+            font-family: var(--font-serif);
+            font-size: 14px;
+            letter-spacing: 2px;
+            transition: all 0.3s var(--easing-snap);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--red-primary);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1;
+        }
+
+        .nav-box:hover {
+            border-color: var(--red-bright);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(138, 0, 0, 0.4);
+            color: #fff;
+        }
+
+        .nav-box:hover::before {
+            opacity: 0.15;
+        }
+
+        .nav-box span {
+            position: relative;
+            z-index: 2;
+        }
+
+        @media (max-width: 768px) {
+            .nav-box {
+                padding: 6px 12px;
+                font-size: 12px;
+                letter-spacing: 1px;
+            }
+        }
 </style>
+<base target="_blank">
+<base target="_blank">
 <base target="_blank">
 <base target="_blank">
 <base target="_blank">
@@ -570,14 +680,24 @@
     <div class="noise-overlay"></div>
 
     <header>
-        <div style="padding: 20px; font-family:var(--font-serif); font-size: 12px; color: #666;">
-            THEATRE OF <br> THREE-NINE AUDIO DOMAIN
+        <div style="padding: 20px; font-family:var(--font-serif); font-size: 12px; color: #666; display: flex; justify-content: space-between; align-items: flex-start;">
+            <div>
+                THEATRE OF <br> THREE-NINE AUDIO DOMAIN
+            </div>
+            <div style="display: flex; gap: 15px; margin-top: 5px;">
+                <a href="https://baike.baidu.com/item/%E6%88%91%E4%B8%8D%E6%98%AF%E6%88%8F%E7%A5%9E/63558730" target="_blank" class="nav-box">
+                    戏神百科
+                </a>
+                <a href="https://i-m-not-a-theatre-god-main-characters.netlify.app/" target="_blank" class="nav-box">
+                    戏神主要角色
+                </a>
+            </div>
         </div>
     </header>
 
     <section class="intro-section" id="hero">
         <div style="flex:1; margin-left: 5vw; z-index:10; pointer-events:none;">
-            
+
             <!-- Logo 图片（替换为截图中的红色书法 logo） -->
             <div class="logo-container">
                 <img src="https://cdn.jsdelivr.net/gh/hmq151/I-m-Not-a-Theatre-God-Tribute@main/music%20and%20video/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202026-02-02%20212054.png" 
@@ -616,7 +736,7 @@
 
     <section class="knives-section">
         <h2 class="dramatic-title">刀子文分发处 <span style="font-size:1rem; opacity:0.5; margin-left:10px;">/// 实时同步</span></h2>
-        
+
         <div class="scrolling-wrapper" id="knife-container">
             <div class="knife-card">
                 <span class="chapter-title">LOADING ORACLE...</span>
@@ -628,20 +748,20 @@
     <!-- 图库 Section -->
     <section class="gallery-section">
         <h2 class="dramatic-title">图库 <span style="font-size:1rem; opacity:0.5; margin-left:10px;">/// Gallery</span></h2>
-        
+
         <div class="gallery-wrapper">
             <div class="gallery-item">
                 <img src="https://cdn.jsdelivr.net/gh/hmq151/I-m-Not-a-Theatre-God-Tribute@main/picture/2720a0775056bed3bd8bb04e369173cd3493114874431947.jpg" 
                      alt="戏神同人图1"
-                     onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'padding: 20px; color: #666; text-align: center; height: 300px; display: flex; align-items: center; justify-content: center;\'>图片加载失败</div>'">
+                     onerror="this.style.display='none'; this.parentElement.innerHTML='<div style='padding: 20px; color: #666; text-align: center; height: 300px; display: flex; align-items: center; justify-content: center;'>图片加载失败</div>'">
             </div>
-            
+
             <div class="gallery-item">
                 <img src="https://cdn.jsdelivr.net/gh/hmq151/I-m-Not-a-Theatre-God-Tribute@main/picture/3c92e52d78c0b44ebd0ac0cbe2a24f743493114874431947.png" 
                      alt="戏神同人图2"
-                     onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'padding: 20px; color: #666; text-align: center; height: 300px; display: flex; align-items: center; justify-content: center;\'>图片加载失败</div>'">
+                     onerror="this.style.display='none'; this.parentElement.innerHTML='<div style='padding: 20px; color: #666; text-align: center; height: 300px; display: flex; align-items: center; justify-content: center;'>图片加载失败</div>'">
             </div>
-            
+
             <a href="https://i-m-not-a-theatre-god-tribute-picture.netlify.app/" target="_blank" class="gallery-more">
                 <span style="font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 10px;">查看更多</span>
                 <span style="font-size: 0.8rem; color: #666;">View More →</span>
@@ -652,7 +772,7 @@
     <section>
         <h2 class="dramatic-title">观众席 <span style="font-size:1rem; opacity:0.5;">/// Bilibili Feed</span></h2>
         <div class="video-section" id="bili-container">
-            
+
             <!-- 视频 1-11 （原有） -->
             <div class="bilibili-embed-card">
                 <div class="video-container">
@@ -927,6 +1047,13 @@
                 <span style="font-size: 12px; color: #666; font-family: var(--font-sans);">迅星工作室</span>
             </a>
         </div>
+
+        <!-- 更多戏神组织入口 -->
+        <a href="https://i-m-not-a-theatre-god-organization.netlify.app/" target="_blank" class="org-entry-link">
+            <span>更多戏神组织入口</span>
+            <span class="arrow">→</span>
+        </a>
+
         <br><br>
         <p style="font-size: 10px; color: #333; font-family: var(--font-sans);">
             DEVELOPED BY Xunxing Technology Studio | FAN MEMORIAL SITE | NOT AFFILIATED WITH THREE-NINE
@@ -946,14 +1073,14 @@
 
         // 刀子语录
         const knifeData = [
-            { ch: "   ", title: "刀子1", text: "‘陈伶……’‘嗯？’‘我能问个问题吗？’‘什么？’‘从刚才开始……你就在和谁说话？’陈伶愣住了。" },
+            { ch: "   ", title: "刀子1", text: "'陈伶……''嗯？''我能问个问题吗？''什么？''从刚才开始……你就在和谁说话？'陈伶愣住了。" },
             { ch: "  ", title: "刀子2", text: "刀尖划过咽喉的触感，是那么的凉...陈伶笑着用手指抹去鲜血，妆容未乱。" },
             { ch: "  ", title: "刀子3", text: "观众还在看着，我又怎能谢幕？即便灵魂已被撕碎，我的戏，还没唱完！" }
         ];
 
         const knifeContainer = document.getElementById('knife-container');
         knifeContainer.innerHTML = '';
-        
+
         // 添加刀子卡片
         knifeData.forEach((k) => {
             let card = document.createElement('div');
@@ -981,16 +1108,16 @@
 
         // 音频系统
         let voiceAudio = null;
-        
+
         function playVoice() {
             if (voiceAudio) {
                 voiceAudio.pause();
                 voiceAudio = null;
             }
-            
+
             voiceAudio = new Audio();
             voiceAudio.src = 'https://cdn.jsdelivr.net/gh/hmq151/I-m-Not-a-Theatre-God-Tribute@main/music%20and%20video/m7a7w-43c5e.mp3';
-            
+
             voiceAudio.play().then(() => {
                 console.log('语音播放开始');
             }).catch(e => {
@@ -1004,14 +1131,14 @@
             const player = document.getElementById('main-audio');
             const status = document.getElementById('player-status');
             const bars = document.querySelectorAll('.bar');
-            
+
             document.querySelectorAll('.music-item').forEach(i => i.classList.remove('active'));
             if(userClickElement) userClickElement.classList.add('active');
 
             player.src = url;
-            
+
             status.innerHTML = `NOW PLAYING:<br><span style="color:var(--red-primary);">${songName}</span> <span style="font-size:0.7em; opacity:0.7;">// ${artist}</span>`;
-            
+
             bars.forEach(bar => {
                 bar.style.background = "#ff1a1a";
                 bar.style.animationDuration = (Math.random() * 0.3 + 0.4) + 's';
